@@ -42,7 +42,36 @@ textarea {
 .app {
   width: min(960px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 40px 0 64px;
+  padding: 40px 0 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-footer {
+  margin-top: 28px;
+  padding: 18px 4px 8px;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  justify-content: center;
+}
+
+.site-footer__nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: color 160ms ease;
+}
+
+.site-footer__nav a:hover,
+.site-footer__nav a:focus-visible {
+  color: var(--accent);
 }
 
 .eyebrow,
@@ -54,6 +83,7 @@ textarea {
 
 .stage {
   position: relative;
+  flex: 1;
 }
 
 .screen {
@@ -423,6 +453,12 @@ textarea:focus {
   .result-actions {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .site-footer__nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
   }
 }
 
