@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>М.Видео — карточка товара</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <main class="stage">
+        <!-- Screen 1: input -->
+        <section class="screen is-active" id="screen-input" data-screen="input">
+          <div class="panel">
+            <p class="eyebrow">Автозаполнение характеристик карточки товара</p>
+            <h1>Введите название и описание товара</h1>
+            <p class="lead">
+              Сервис извлечёт обязательные атрибуты из текста, приведёт их к формату
+              каталога и покажет уверенность по каждому полю.
+            </p>
+
+            <form id="extract-form" class="form">
+              <label class="field">
+                <span>Название</span>
+                <input
+                  id="title"
+                  name="title"
+                  type="text"
+                  required
+                  maxlength="300"
+                  placeholder="Например: Смартфон Samsung Galaxy S24 256 ГБ чёрный"
+                  value="Смартфон Samsung Galaxy S24 256 ГБ чёрный"
+                />
+                <span class="char-count" id="title-count" aria-live="polite">0 / 300</span>
+              </label>
+
+              <label class="field">
+                <span>Описание</span>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="8"
+                  maxlength="6000"
+                  placeholder="Вставьте описание с сайта производителя или из своей карточки"
+                >Флагманский смартфон Samsung Galaxy S24 с диагональю экрана 6,2 дюйма, объёмом памяти 256 ГБ и батареей 4000 мАч. Корпус чёрный, поддержка 5G. Ideal для работы и развлечений.</textarea>
+                <span class="char-count" id="description-count" aria-live="polite">0 / 6000</span>
+              </label>
+
+              <div class="examples">
+                <span>Для демо прототипа:</span>
+                <button type="button" class="chip" data-example="phone">Смартфон</button>
+                <button type="button" class="chip" data-example="laptop">Ноутбук</button>
+                <button type="button" class="chip" data-example="weak">Слабое описание</button>
+              </div>
+
+              <div class="actions">
+                <button type="submit" class="btn btn-primary">Подготовить карточку</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Screen 2: loading -->
+        <section class="screen" id="screen-loading" data-screen="loading" hidden>
+          <div class="panel panel-center">
+            <div class="loader" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <h1>Изучаю информацию и готовлю карточку</h1>
+            <p class="lead" id="loading-hint">Читаю текст → извлекаю атрибуты → нормализую значения</p>
+          </div>
+        </section>
+
+        <!-- Screen 3: result -->
+        <section class="screen" id="screen-result" data-screen="result" hidden>
+          <div class="panel">
+            <div class="result-head">
+              <div>
+                <p class="eyebrow" id="category-label">Категория</p>
+                <h1 id="result-title">Заголовок</h1>
+              </div>
+            </div>
+
+            <p class="result-desc" id="result-description"></p>
+
+            <div class="attrs-head">
+              <h2>Ключевые атрибуты</h2>
+              <p>Значения с низкой уверенностью подсвечены — проверьте их перед сохранением.</p>
+            </div>
+
+            <div class="attrs" id="attrs-table" role="table" aria-label="Атрибуты товара"></div>
+
+            <div class="actions result-actions">
+              <button type="button" class="btn btn-primary" id="btn-again">Новая карточка</button>
+            </div>
+
+            <p class="toast" id="toast" hidden></p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/assets/app.js" type="module"></script>
+  </body>
+</html>
