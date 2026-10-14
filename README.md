@@ -31,7 +31,12 @@
 | [frontend/](frontend/) | UI прототипа (экраны ввода → ожидания → результата) |
 | [backend/](backend/) | API извлечения атрибутов (FastAPI) |
 
-## Запуск прототипа
+## Демо
+
+Онлайн: [https://thedatatrickster.github.io/hackathon-1026/](https://thedatatrickster.github.io/hackathon-1026/)  
+(GitHub Pages отдаёт `frontend/`; извлечение атрибутов работает в браузере.)
+
+## Локальный запуск
 
 ```bash
 source .venv/bin/activate

@@ -1,3 +1,5 @@
+import { extractAttributes } from "./extract.js";
+
 const screens = {
   input: document.getElementById("screen-input"),
   loading: document.getElementById("screen-loading"),
@@ -233,7 +235,8 @@ async function extractCard() {
   let data;
 
   try {
-    const response = await fetch("/api/extract", {
+    // Prefer local API when available (uvicorn); fall back to in-browser rules for GitHub Pages.
+    const response = await fetch("api/extract", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, description }),
@@ -244,10 +247,8 @@ async function extractCard() {
     }
 
     data = await response.json();
-  } catch (error) {
-    showScreen("input");
-    showToast(error.message || "Не удалось обработать карточку");
-    return;
+  } catch {
+    data = extractAttributes(title, description);
   }
 
   const elapsed = Date.now() - started;
